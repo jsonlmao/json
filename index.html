@@ -138,8 +138,8 @@
         <button class="donate-btn" id="donateToggle">❤️ Donate</button>
         <div class="donation-menu" id="donationMenu">
           <a class="donation-item" href="https://www.roblox.com/game-pass/115009708/coral-bits" target="_blank" data-donation="true">50 Robux</a>
-          <a class="donation-item" href="https://www.roblox.com/game-pass/115011804/krabby-patty" target="_blank" data-donation="true">100 Robux</a>
-          <a class="donation-item" href="https://www.roblox.com/game-pass/1506267208/hghh" target="_blank" data-donation="true">250 Robux</a>
+          <a class="donation-item" href="https://www.roblox.com/game-pass/123456789/example1" target="_blank" data-donation="true">100 Robux</a>
+          <a class="donation-item" href="https://www.roblox.com/game-pass/987654321/example2" target="_blank" data-donation="true">250 Robux</a>
         </div>
       </div>
     </div>
@@ -160,11 +160,22 @@
     const donationMenu = document.getElementById('donationMenu');
     const donationItems = document.querySelectorAll('.donation-item[data-donation="true"]');
 
-    // Audio for celebration
-    const celebrationSound = new Audio('https://www.myinstants.com/media/sounds/fnaf-yay-children.mp3');
+    // Audio for celebration - trying alternative source
+    let celebrationSound = null;
+    
+    // Preload audio on first user interaction
+    function initAudio() {
+      if (!celebrationSound) {
+        // Try multiple sources in case one fails
+        celebrationSound = new Audio('https://tuna.voicemod.net/sound/f82f1c41-9c05-4c6b-afda-88f07dedd594');
+        celebrationSound.volume = 0.7;
+        celebrationSound.load();
+      }
+    }
 
     donateToggle.addEventListener('click', () => {
       donationMenu.classList.toggle('active');
+      initAudio(); // Initialize audio on first click
     });
 
     // Close menu when clicking outside
@@ -223,9 +234,21 @@
     // Add click event to each donation item
     donationItems.forEach(item => {
       item.addEventListener('click', (e) => {
+        initAudio();
         createConfetti();
-        celebrationSound.currentTime = 0;
-        celebrationSound.play().catch(err => console.log('Audio play failed:', err));
+        
+        if (celebrationSound) {
+          celebrationSound.currentTime = 0;
+          celebrationSound.play()
+            .then(() => console.log('Sound playing!'))
+            .catch(err => {
+              console.log('Audio play failed:', err);
+              // Fallback: try alternative source
+              const backup = new Audio('https://tuna.voicemod.net/sound/5347e1b5-431b-41b7-a7b9-6f67cde9cdc9');
+              backup.volume = 0.7;
+              backup.play().catch(e => console.log('Backup also failed:', e));
+            });
+        }
       });
     });
   </script>
