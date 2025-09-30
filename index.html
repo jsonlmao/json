@@ -160,13 +160,12 @@
     const donationMenu = document.getElementById('donationMenu');
     const donationItems = document.querySelectorAll('.donation-item[data-donation="true"]');
 
-    // Audio for celebration - using a working CDN source
+    // Audio for celebration - using your hosted FNAF sound
     let celebrationSound = null;
     
     // Preload audio on first user interaction
     function initAudio() {
       if (!celebrationSound) {
-        // Using a celebration sound from a reliable CDN
         celebrationSound = new Audio('https://jsonlmao.github.io/json/kids-cheering-fnaf-1-sound-effects-made-with-Voicemod.mp3');
         celebrationSound.volume = 0.7;
         celebrationSound.load();
