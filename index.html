@@ -160,14 +160,14 @@
     const donationMenu = document.getElementById('donationMenu');
     const donationItems = document.querySelectorAll('.donation-item[data-donation="true"]');
 
-    // Audio for celebration - trying alternative source
+    // Audio for celebration - using a working CDN source
     let celebrationSound = null;
     
     // Preload audio on first user interaction
     function initAudio() {
       if (!celebrationSound) {
-        // Try multiple sources in case one fails
-        celebrationSound = new Audio('https://tuna.voicemod.net/sound/f82f1c41-9c05-4c6b-afda-88f07dedd594');
+        // Using a celebration sound from a reliable CDN
+        celebrationSound = new Audio('https://jsonlmao.github.io/json/kids-cheering-fnaf-1-sound-effects-made-with-Voicemod.mp3');
         celebrationSound.volume = 0.7;
         celebrationSound.load();
       }
@@ -243,10 +243,6 @@
             .then(() => console.log('Sound playing!'))
             .catch(err => {
               console.log('Audio play failed:', err);
-              // Fallback: try alternative source
-              const backup = new Audio('https://tuna.voicemod.net/sound/5347e1b5-431b-41b7-a7b9-6f67cde9cdc9');
-              backup.volume = 0.7;
-              backup.play().catch(e => console.log('Backup also failed:', e));
             });
         }
       });
