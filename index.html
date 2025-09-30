@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Under Construction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      height: 100vh;
+      background-color: #ffffff;
+      font-family: 'Indie Flower', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background-color: #404040;
+      width: 100vw;
+      max-width: 100%;
+      height: 250px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 80px;
+      padding-left: 80px;
+      position: relative;
+    }
+    .left-content {
+      display: flex;
+      align-items: center;
+    }
+    .donate-btn {
+      background-color: #606060;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      padding: 15px 50px;
+      font-size: 20px;
+      font-family: 'Indie Flower', cursive;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .donate-btn:hover {
+      background-color: #ffffff;
+      color: #404040;
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.4);
+    }
+    .donation-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 10px;
+      background-color: #606060;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      padding: 10px 0;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    .donation-menu.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .donation-item {
+      padding: 12px 20px;
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.2s ease;
+      font-size: 18px;
+    }
+    .donation-item:hover {
+      background-color: #808080;
+    }
+    .right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 20px;
+    }
+    .text-content {
+      text-align: right;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .subtitle {
+      font-size: 18px;
+      color: #e0e0e0;
+    }
+    .icon img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #fff;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+        padding: 40px 20px;
+        align-items: center;
+        gap: 30px;
+      }
+      .left-content {
+        order: 2;
+      }
+      .right-content {
+        order: 1;
+        align-items: center;
+      }
+      .text-content {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-content">
+      <div style="position: relative;">
+        <button class="donate-btn" id="donateToggle">❤️ Donate</button>
+        <div class="donation-menu" id="donationMenu">
+          <a class="donation-item" href="https://www.roblox.com/game-pass/115009708/coral-bits" target="_blank" data-donation="true">50 Robux</a>
+          <a class="donation-item" href="https://www.roblox.com/game-pass/115011804/krabby-patty" target="_blank" data-donation="true">100 Robux</a>
+          <a class="donation-item" href="https://www.roblox.com/game-pass/1506267208/hghh" target="_blank" data-donation="true">250 Robux</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-content">
+      <div class="text-content">
+        <div class="title">Sorgy website is in works</div>
+        <div class="subtitle">i lied i will never finish it</div>
+      </div>
+      <div class="icon">
+        <img src="https://i.pinimg.com/736x/b1/23/8e/b1238e98ecf1ec234ccfcd11780e34f2.jpg" alt="icon" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const donateToggle = document.getElementById('donateToggle');
+    const donationMenu = document.getElementById('donationMenu');
+    const donationItems = document.querySelectorAll('.donation-item[data-donation="true"]');
+
+    // Audio for celebration
+    const celebrationSound = new Audio('https://www.myinstants.com/media/sounds/fnaf-yay-children.mp3');
+
+    donateToggle.addEventListener('click', () => {
+      donationMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!donateToggle.contains(event.target) && !donationMenu.contains(event.target)) {
+        donationMenu.classList.remove('active');
+      }
+    });
+
+    // Confetti system
+    function createConfetti() {
+      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#ff69b4'];
+      const confettiCount = 100;
+
+      for (let i = 0; i < confettiCount; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = Math.random() * 10 + 5 + 'px';
+          confetti.style.height = Math.random() * 10 + 5 + 'px';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.bottom = '-10px';
+          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+          confetti.style.opacity = '1';
+          confetti.style.pointerEvents = 'none';
+          confetti.style.zIndex = '9999';
+
+          document.body.appendChild(confetti);
+
+          const duration = Math.random() * 2 + 2;
+          const rotation = Math.random() * 720 - 360;
+          const drift = Math.random() * 100 - 50;
+
+          confetti.animate([
+            { 
+              transform: 'translateY(0) translateX(0) rotate(0deg)', 
+              opacity: 1 
+            },
+            { 
+              transform: `translateY(-100vh) translateX(${drift}px) rotate(${rotation}deg)`, 
+              opacity: 0 
+            }
+          ], {
+            duration: duration * 1000,
+            easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          });
+
+          setTimeout(() => {
+            confetti.remove();
+          }, duration * 1000);
+        }, i * 10);
+      }
+    }
+
+    // Add click event to each donation item
+    donationItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        createConfetti();
+        celebrationSound.currentTime = 0;
+        celebrationSound.play().catch(err => console.log('Audio play failed:', err));
+      });
+    });
+  </script>
+</body>
+</html>
